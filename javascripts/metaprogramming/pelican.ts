@@ -1,3 +1,8 @@
+/**
+ * Delegate/expose all attributes of the given model parameter,
+ * so we don't have to assign the attributes manually
+ */
+
 interface BaseModel<T extends Object> {
   [x: `has_${string}`]: boolean
 }
@@ -20,6 +25,8 @@ class BaseModel<T>{
    })
  }
 }
+
+// Bird
 
 interface Bird {
   name: string
@@ -55,16 +62,6 @@ class BirdModel extends BaseModel<Bird> {
   }
 }
 
-interface Dog {
-  name: string,
-  race: string
-}
-
-interface DogModel extends Dog {}
-class DogModel extends BaseModel<Dog> {
-  bark () {}
-}
-
 const mrPelican: Bird = {
   name: 'Mr Pelican',
   race: 'Pelicanus occidentalis californicus',
@@ -75,17 +72,30 @@ const mrPelican: Bird = {
   age: 1
 }
 
-const mrDog: Dog = {
-  name: 'Mr Dog',
-  race: 'Dalmation'
-}
-
 const littleBird = new BirdModel(mrPelican)
-const littleDog = new DogModel(mrDog)
 
 console.log('bird name: ', littleBird.name) // bird name:  Mr Pelican
 console.log('bird wings color: ', littleBird.wing_feather_color) // bird wings color:  black
 console.log('bird has name: ', littleBird.has_age) // bird has name:  true
+
+// Dog
+
+interface Dog {
+  name: string
+  race: string
+}
+
+interface DogModel extends Dog {}
+class DogModel extends BaseModel<Dog> {
+  bark () {}
+}
+
+const mrDog = {
+  name: 'Mr Dog',
+  race: 'Dalmation',
+  gender: 'male' // add unregistered attribute
+}
+const littleDog = new DogModel(mrDog)
 console.log('dog name: ', littleDog.name) // dog name:  Mr Dog
 console.log('dog has name: ', littleDog.has_name) // dog has name: true
-// console.log('dog name: ', littleDog.beak_color) // uncomment to fail
+// console.log('dog has name: ', littleDog.gender) // uncomment to fail. Property 'gender' does not exist on type 'DogModel'
