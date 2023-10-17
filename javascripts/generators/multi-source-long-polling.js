@@ -1,17 +1,17 @@
 const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration))
 
 async function firstSource () {
-  await delay(500)
+  await delay(5000)
   return 'burger'
 }
 
 async function secondSource () {
-  await delay(500)
+  await delay(2000)
   return 'sausage'
 }
 
 async function thirdSource () {
-  await delay(500)
+  await delay(100)
   return 'drink'
 }
 
@@ -31,9 +31,9 @@ async function startClassicStreaming (duration = 1000, callback) {
   startClassicStreaming(duration, callback)
 }
 
-startClassicStreaming(5000, (data) => {
-  console.log('by callback: ', data)
-})
+// startClassicStreaming(1000, (data) => {
+//   console.log('by callback: ', data)
+// })
 
 
 // With Generators
@@ -54,4 +54,4 @@ async function startStreaming (duration = 1000) {
   }
 }
 
-// startStreaming(5000)
+startStreaming(1000)

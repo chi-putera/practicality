@@ -46,7 +46,6 @@ const eggFactory = new Factory('EggFactory', { type: 'egg', uom: 'item' }, 1000)
 // 2 sausages
 
 // Start working on the solution
-
 async function startProduction (factory) {
   await factory.produce()
   startProduction(factory)
