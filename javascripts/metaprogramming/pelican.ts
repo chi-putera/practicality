@@ -1,8 +1,4 @@
-const capitalize = (name: string) => {
-  return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase()
-}
-
-interface BaseModel<T> {
+interface BaseModel<T extends Object> {
   [x: `has_${string}`]: boolean
 }
 
@@ -87,6 +83,9 @@ const mrDog: Dog = {
 const littleBird = new BirdModel(mrPelican)
 const littleDog = new DogModel(mrDog)
 
-console.log('bird name: ', littleBird.name)
-console.log('bird has name: ', littleBird.has_age)
-console.log('dog name: ', littleDog.name)
+console.log('bird name: ', littleBird.name) // bird name:  Mr Pelican
+console.log('bird wings color: ', littleBird.wing_feather_color) // bird wings color:  black
+console.log('bird has name: ', littleBird.has_age) // bird has name:  true
+console.log('dog name: ', littleDog.name) // dog name:  Mr Dog
+console.log('dog has name: ', littleDog.has_name) // dog has name: true
+// console.log('dog name: ', littleDog.beak_color) // uncomment to fail
